@@ -35,3 +35,17 @@ public:
 
 	bool Connect();
 };
+
+class TCPServer //: public Server
+{
+	sockaddr_in _service;
+	TCPSocket _listen;
+	TCPSocket _accept;
+public:
+	TCPServer(const char* inAddr, USHORT inPort);
+	~TCPServer();
+
+	bool Accept();
+	void Listen();
+	void Send();
+};

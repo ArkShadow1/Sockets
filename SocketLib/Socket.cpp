@@ -26,3 +26,18 @@ bool TCPClient::Connect()
 		return false;
 	return true;
 }
+
+TCPServer::TCPServer(const char* inAddr, USHORT inPort)
+{
+	_service.sin_family = AF_INET;
+	_service.sin_addr.s_addr = inet_addr(inAddr);
+	_service.sin_port = htons(inPort);
+}
+
+
+
+bool TCPServer::Accept()
+{
+	accept(_accept._hSocket,NULL,NULL);
+}
+
