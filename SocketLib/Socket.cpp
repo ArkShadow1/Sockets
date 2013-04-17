@@ -1,4 +1,4 @@
-#include "Socket.hpp"
+#include <Socket.hpp>
 
 TCPSocket::TCPSocket(void)
 {
@@ -13,6 +13,18 @@ TCPSocket::~TCPSocket(void)
 	closesocket( _hSocket );
 }
 
+TCPSocket TCPSocket::Accept()
+{
+	TCPSocket newSocket;
+	newSocket._hSocket = SOCKET_ERROR;
+	while(newSocket._hSocket == SOCKET_ERROR)
+	{
+		newSocket._hSocket = accept(_hSocket,NULL,NULL);
+	}
+	return newSocket;
+}
+
+/******************CLIENT***************/
 TCPClient::TCPClient(const char* inAddr, USHORT inPort)
 {
 	_service.sin_family = AF_INET;
@@ -22,11 +34,24 @@ TCPClient::TCPClient(const char* inAddr, USHORT inPort)
 
 bool TCPClient::Connect()
 {
-	if( connect( _socket._hSocket, (SOCKADDR*)&_service, sizeof(_service) ) == SOCKET_ERROR)
-		return false;
-	return true;
+	if( connect( _socket._hSocket, (SOCKADDR*)&_service, sizeof(_service) ) != SOCKET_ERROR)
+		return true;
+	std::cerr << "ERROR: Connect() " << WSAGetLastError() << std::endl;
+	return false;
+	
 }
 
+
+int TCPClient::Send(char data[])
+{
+	strcpy_s(_buf,data);
+	return send(_socket._hSocket,(const char*)&_buf,strlen(_buf)+1,0);
+}
+
+TCPClient::~TCPClient(void){}
+
+
+/******************SERVER***************/
 TCPServer::TCPServer(const char* inAddr, USHORT inPort)
 {
 	_service.sin_family = AF_INET;
@@ -34,10 +59,24 @@ TCPServer::TCPServer(const char* inAddr, USHORT inPort)
 	_service.sin_port = htons(inPort);
 }
 
-
-
-bool TCPServer::Accept()
+bool TCPServer::ServerBind()
 {
-	accept(_accept._hSocket,NULL,NULL);
+	if(bind(_listen._hSocket, (SOCKADDR*)&_service, sizeof(_service)) != SOCKET_ERROR)
+		return true;
+	std::cerr << "ERROR: ServerBind() " << WSAGetLastError() << std::endl;
+	return false;
 }
+
+bool TCPServer::ServerListen()
+{
+	if(listen(_listen._hSocket,1)!=SOCKET_ERROR)
+	{
+		_accept = _listen.Accept();
+		return true;
+	}
+	std::cerr << "ERROR: ServerListen() " << WSAGetLastError() << std::endl;
+	return false;
+}
+
+ TCPServer::~TCPServer(void){}
 

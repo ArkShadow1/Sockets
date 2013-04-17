@@ -5,6 +5,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestClient", "TestClient\Te
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SocketLib", "SocketLib\SocketLib.vcxproj", "{C08E0177-1484-4212-86FD-9112D84C6B01}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestServer", "TestServer\TestServer.vcxproj", "{68FA2750-E379-4F8E-B424-6E3E236FD584}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -19,6 +21,10 @@ Global
 		{C08E0177-1484-4212-86FD-9112D84C6B01}.Debug|Win32.Build.0 = Debug|Win32
 		{C08E0177-1484-4212-86FD-9112D84C6B01}.Release|Win32.ActiveCfg = Release|Win32
 		{C08E0177-1484-4212-86FD-9112D84C6B01}.Release|Win32.Build.0 = Release|Win32
+		{68FA2750-E379-4F8E-B424-6E3E236FD584}.Debug|Win32.ActiveCfg = Debug|Win32
+		{68FA2750-E379-4F8E-B424-6E3E236FD584}.Debug|Win32.Build.0 = Debug|Win32
+		{68FA2750-E379-4F8E-B424-6E3E236FD584}.Release|Win32.ActiveCfg = Release|Win32
+		{68FA2750-E379-4F8E-B424-6E3E236FD584}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
