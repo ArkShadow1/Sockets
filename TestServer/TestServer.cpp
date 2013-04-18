@@ -10,7 +10,7 @@ int main()
 		cout << "Server boundeded..." <<endl;
 		if(serv.ServerListen())
 		{
-			cout << "Server listeninining...." <<endl;
+			cout << "Server listening" <<endl;
 		}
 	}
 	unsigned int const MAX = 256;
